@@ -9,7 +9,7 @@ function setup() {
   let canvas = createCanvas(canvasWidth, canvasHeight);
   //canvas.style('border','13px solid black'); 
   if (window.jQuery) { 
-    resizeCanvas(400, 400);
+    canvas.resizeCanvas(400, 400);
     canvas.parent('p5js');
   }
   
