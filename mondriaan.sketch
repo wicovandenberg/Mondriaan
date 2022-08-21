@@ -7,16 +7,17 @@ let fills = [];
 function setup() {
   
   let canvas = createCanvas(canvasWidth, canvasHeight);
-  //check if on website and add canavs to container
+  //canvas.style('border','13px solid black'); 
   if (window.jQuery) { 
     canvas.parent('p5js');
   }
-  //canvas.style('border','13px solid black'); 
   
+  p5init();
+}
+function p5init() {
   background(255);
   noStroke();
   divideRectangles();
-  
 }
 
 function draw() {
