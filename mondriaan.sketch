@@ -1,0 +1,104 @@
+let canvasWidth = 750;
+let canvasHeight = 750;
+let planes = [];
+let lines = [];
+let fills = [];
+
+function setup() {
+  
+  let canvas = createCanvas(canvasWidth, canvasHeight);
+  //canvas.style('border','13px solid black'); 
+  
+  background(255);
+  noStroke();
+  divideRectangles();
+  
+}
+
+function draw() {
+  
+}
+function divideRectangles() {
+  //first rectangle is full canvas
+  fill(70);
+  planes[0] = new Plane(0,0,canvasWidth,canvasHeight); 
+  
+  let selPlane = planes[0];
+  fill(20);
+  //selPlane = new Plane(40,100,300,400);
+  console.log("x: " + selPlane.x);
+  //flip a coin for horizontal or vertical split
+  if ((random() < 0.5) == true) {
+    //horizontal (take y to width)
+    y = selPlane.y;
+    height = selPlane.height;
+    splitPos = Math.round(random(y,height));
+    console.log("splitPos: " + splitPos);
+    fill(0,150,0);
+    console.log("height: " + height);
+    p = new Plane(selPlane.x,selPlane.y + splitPos,selPlane.width,selPlane.height-splitPos);
+  } else {
+    //vertical (take x to height)
+    x = selPlane.x;
+    width = selPlane.width;
+    splitPos = Math.round(random(x,width));
+    console.log("x: " + splitPos);
+    fill(150,0,0);
+    p = new Plane(selPlane.x + splitPos,selPlane.y,selPlane.width-splitPos,selPlane.height);
+    
+  }
+  
+}
+function Plane(x,y,width,height) {  
+  this.x=x;  
+  this.y=y;  
+  this.width=width;  
+  this.height=height; 
+  rect(x,y,width,height);
+  /*this.changeSalary=changeSalary;  
+  function changeSalary(otherSalary) {  
+    this.salary=otherSalary;  
+  } */ 
+}  
+ 
+
+function mouseClicked() {
+  //print(JSON.stringify(rectangles[0]));
+}
+function drawLines() {
+
+  //draw between 2 and 3 lines from side to side using both orientations (vertical/horizontal) at least once
+  let nrLines = Math.round(random(2,3));
+  let lineThickness = Math.round(canvasWidth * 0.025);
+  console.log("nrLines: " + nrLines);
+  console.log("lineThickness: " + lineThickness);
+  
+  //let nrHorizontal = 0;
+  //let nrVertical = 0;
+  //draw at least 1 horizontal and 1 vertical line
+  lines[0] = rect(0,200,canvasWidth,lineThickness);
+  lines[1] = rect(200,0,lineThickness,canvasHeight);
+  for (let i = 0; i < nrLines; i++) {
+    /*let orientation = (random() < 0.5) == true ? "horizontal" : "vertical";
+    
+    console.log(orientation);
+    if ((orientation === "horizontal" && nrHorizontal !== nrLines) || (orientation === "vertical" && nrVertical === nrLines)) {
+      nrHorizontal += 1;
+      rect(300,0,20,750);
+    } else {
+      nrVertical += 1;
+      rect(0,100,750,20);
+    }*/
+  }
+  
+  
+  //draw between 1 and 2 intersecting lines
+  drawIntersects();
+}
+function drawIntersects() {
+  
+}
+function drawFills() {
+  
+  
+}
