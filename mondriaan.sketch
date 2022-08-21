@@ -5,15 +5,18 @@ let fills = [];
 
 function setup() {
   
-  let canvas = createCanvas(canvasWidth, canvasHeight);
-  //canvas.style('border','13px solid black'); 
   if (window.jQuery) { 
-    canvas.parent('p5js');
     let canvasWidth = 400;
     let canvasHeight = 400;
   } else {
     let canvasWidth = 750;
     let canvasHeight = 750;
+  }
+  
+  let canvas = createCanvas(canvasWidth, canvasHeight);
+  //canvas.style('border','13px solid black'); 
+  if (window.jQuery) { 
+    canvas.parent('p5js');
   }
   
   p5init();
