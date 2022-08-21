@@ -7,7 +7,10 @@ let fills = [];
 function setup() {
   
   let canvas = createCanvas(canvasWidth, canvasHeight);
-  canvas.parent('p5js');
+  //check if on website and add canavs to container
+  if (window.jQuery) { 
+    canvas.parent('p5js');
+  }
   //canvas.style('border','13px solid black'); 
   
   background(255);
