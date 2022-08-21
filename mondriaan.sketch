@@ -11,7 +11,7 @@ function setup() {
   if (window.jQuery) { 
     canvasWidth = 400;
     canvasHeight = 400;
-    canvas.resizeCanvas(400, 400);
+    resizeCanvas(400, 400);
     canvas.parent('p5js');
   }
   
