@@ -7,7 +7,8 @@ let fills = [];
 function setup() {
   
   let canvas = createCanvas(canvasWidth, canvasHeight);
-  //canvas.style('border','13px solid black'); 
+  
+  //if on website
   if (window.jQuery) { 
     canvasWidth = 400;
     canvasHeight = 400;
@@ -27,6 +28,12 @@ function draw() {
   
 }
 function divideRectangles() {
+  /*
+  algorithm
+  There is a small change on doing a cross section (split in 4 at once), maybe 10%
+  and else it's a single split in 2.
+  */
+  
   //first rectangle is full canvas
   fill(70);
   planes[0] = new Plane(0,0,canvasWidth,canvasHeight); 
@@ -42,9 +49,13 @@ function divideRectangles() {
     height = selPlane.height;
     splitPos = Math.round(random(y,height));
     console.log("splitPos: " + splitPos);
-    fill(0,150,0);
+    fill(0,0,150);
     console.log("height: " + height);
-    p = new Plane(selPlane.x,selPlane.y + splitPos,selPlane.width,selPlane.height-splitPos);
+    p1 = new Plane(selPlane.x,selPlane.y + splitPos,selPlane.width,selPlane.height-splitPos);
+    fill(0,150,150);
+    p2 = new Plane(selPlane.y,selPlane.x,selPlane.width,selPlane.y + splitPos);
+    planes.push(p1);
+    planes.push(p2);
   } else {
     //vertical (take x to height)
     x = selPlane.x;
@@ -52,9 +63,15 @@ function divideRectangles() {
     splitPos = Math.round(random(x,width));
     console.log("x: " + splitPos);
     fill(150,0,0);
-    p = new Plane(selPlane.x + splitPos,selPlane.y,selPlane.width-splitPos,selPlane.height);
+    p1 = new Plane(selPlane.x + splitPos,selPlane.y,selPlane.width-splitPos,selPlane.height);
+    fill(0,150,0);
+    p2 = new Plane(selPlane.x,selPlane.y,selPlane.x + splitPos,selPlane.height);
+    planes.push(p1);
+    planes.push(p2);
     
   }
+  planes.splice(0,1);
+  console.log(planes);
   
 }
 function Plane(x,y,width,height) {  
