@@ -59,7 +59,7 @@ function divideRectangles() {
   //splitPosX = 623;
   console.log('splitPosX: '+splitPosX);
   console.log('1: ' + JSON.stringify(planes));
-  splitPane(selPlane,orientation,splitPosX,splitPosY);
+  splitPane(selPlane,"both",splitPosX,splitPosY);
   console.log('2: ' + JSON.stringify(planes));
   planes.splice(0,1);
   console.log('3: ' + JSON.stringify(planes));
