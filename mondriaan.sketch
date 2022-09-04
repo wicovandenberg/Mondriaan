@@ -28,7 +28,7 @@ function setup() {
 }
 function p5init() {
   background(255);
-  //noStroke();
+  noStroke();
   //strokeWeight(10);
   planes = [0];
   lines = [];
@@ -162,7 +162,7 @@ function Line(x,y,width,height) {
   this.draw=draw;  
   function draw() { 
     console.log('draw');
-    fill(0);
+    fill(20);
     rect(x,y,width,height);  
   }
 }
