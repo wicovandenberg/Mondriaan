@@ -2,6 +2,8 @@ let version = "0.4";
 let canvasWidth = 750;
 let canvasHeight = 750;
 let planes = [];
+let lines = [];
+let lineThickness = 0;
 
 function setup() {
   
@@ -16,20 +18,22 @@ function setup() {
       canvasWidth = 600;
       canvasHeight = 600;
     }
-    
     resizeCanvas(canvasWidth, canvasHeight);
     canvas.parent('p5js');
-    console.log(windowWidth);
     console.log('version: ' + version);
   }
+  lineThickness = Math.round(canvasWidth * 0.025);
   
   p5init();
 }
 function p5init() {
   background(255);
   //noStroke();
+  //strokeWeight(10);
   planes = [0];
+  lines = [];
   divideRectangles();
+  drawLines();
 }
 
 function draw() {
@@ -72,7 +76,7 @@ function divideRectangles() {
   console.log('3: ' + JSON.stringify(planes));
   
   
-  for (let i = 0; i < 3; i++) {
+  for (let i = 0; i < 2; i++) {
     p = planes[0];
     y = p.y;
     height = p.height;
@@ -105,12 +109,16 @@ function splitPane(plane, splitOrientation, splitPosX,splitPosY) {
     p2 = new Plane(plane.x,splitPosY,plane.width,plane.height - splitPosY + plane.y);
     planes.push(p1);
     planes.push(p2);
+    l1 = new Line(plane.x,splitPosY-(lineThickness/2),plane.width,lineThickness);
+    lines.push(l1);
   } else if (splitOrientation === "vertical") {
     console.log('split from: ' + JSON.stringify(plane));
     p1 = new Plane(plane.x,plane.y,splitPosX-plane.x,plane.height);
     p2 = new Plane(splitPosX,plane.y,plane.width-splitPosX+plane.x,plane.height);
     planes.push(p1);
     planes.push(p2);
+    l1 = new Line(splitPosX-(lineThickness/2),plane.y,lineThickness,plane.height);
+    lines.push(l1);
   } else {
     p1 = new Plane(plane.x,plane.y,splitPosX-plane.x,splitPosY-plane.y);
     p2 = new Plane(splitPosX,plane.y,plane.x+plane.width-splitPosX,splitPosY-plane.y);
@@ -120,8 +128,19 @@ function splitPane(plane, splitOrientation, splitPosX,splitPosY) {
     planes.push(p2);
     planes.push(p3);
     planes.push(p4);
+    l1 = new Line(plane.x,splitPosY-(lineThickness/2),plane.width,lineThickness);
+    l2 = new Line(splitPosX-(lineThickness/2),plane.y,lineThickness,plane.height);
+    lines.push(l1);
+    lines.push(l2);
   }
   
+}
+function drawLines() {
+  for (let i = 0; i < lines.length; i++) {
+    console.log('line');
+    selLine = lines[i];
+    selLine.draw();
+  }
 }
 function Plane(x,y,width,height) {  
   this.x=x;  
@@ -134,4 +153,16 @@ function Plane(x,y,width,height) {
   function setColor(color) {  
     this.color=color;  
   }
-}  
+}
+function Line(x,y,width,height) {  
+  this.x=x;  
+  this.y=y;  
+  this.width=width;  
+  this.height=height;
+  this.draw=draw;  
+  function draw() { 
+    console.log('draw');
+    fill(0);
+    rect(x,y,width,height);  
+  }
+}
