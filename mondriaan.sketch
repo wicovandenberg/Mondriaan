@@ -36,8 +36,8 @@ function divideRectangles() {
   
   //first rectangle is full canvas
   fill(70);
-  //planes[0] = new Plane(0,0,canvasWidth,canvasHeight); 
-  planes[0] = new Plane(25,25,600,600); 
+  planes[0] = new Plane(0,0,canvasWidth,canvasHeight); 
+  //planes[0] = new Plane(25,25,600,600); 
   
   
   let selPlane = planes[0];
