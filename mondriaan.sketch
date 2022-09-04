@@ -99,6 +99,7 @@ function divideRectangles() {
   
 }
 function splitPane(plane, orientation, splitPosX,splitPosY) {
+  console.log('orientation: ' + orientation);
   if (orientation === "horizontal") {
     p1 = new Plane(plane.x,plane.y,plane.width,splitPosY-plane.y);
     p2 = new Plane(plane.x,splitPosY,plane.width,plane.height - splitPosY + plane.y);
