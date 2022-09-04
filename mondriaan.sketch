@@ -9,8 +9,14 @@ function setup() {
   
   //if on website
   if (window.jQuery) { 
-    canvasWidth = 600;
-    canvasHeight = 600;
+    if (windowWidth < 768) {
+      canvasWidth = 300;
+      canvasHeight = 300;
+    } else {
+      canvasWidth = 600;
+      canvasHeight = 600;
+    }
+    
     resizeCanvas(canvasWidth, canvasHeight);
     canvas.parent('p5js');
     console.log(windowWidth);
