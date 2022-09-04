@@ -1,9 +1,7 @@
-let version = "0.3";
+let version = "0.4";
 let canvasWidth = 750;
 let canvasHeight = 750;
 let planes = [];
-let lines = [];
-let fills = [];
 
 function setup() {
   
@@ -23,6 +21,7 @@ function setup() {
 function p5init() {
   background(255);
   //noStroke();
+  planes = [0];
   divideRectangles();
 }
 
