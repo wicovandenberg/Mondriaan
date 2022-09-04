@@ -20,7 +20,7 @@ function setup() {
 }
 function p5init() {
   background(255);
-  noStroke();
+  //noStroke();
   divideRectangles();
 }
 
@@ -36,62 +36,77 @@ function divideRectangles() {
   
   //first rectangle is full canvas
   fill(70);
-  planes[0] = new Plane(0,0,canvasWidth,canvasHeight); 
+  //planes[0] = new Plane(0,0,canvasWidth,canvasHeight); 
+  planes[0] = new Plane(25,25,600,600); 
+  
   
   let selPlane = planes[0];
   //flip a coin for horizontal or vertical split
   if ((random() < 0.5) == true) {
-    //horizontal (between y pos and y+height)
     orientation = "horizontal";
-    
-    /*p1 = new Plane(selPlane.x,selPlane.y + splitPos,selPlane.width,selPlane.height-splitPos);
-    p2 = new Plane(selPlane.y,selPlane.x,selPlane.width,selPlane.y + splitPos);
-    planes.push(p1);
-    planes.push(p2);*/
   } else {
-    //vertical (between x pos and x+width)
     orientation = "vertical";
-    
-    
-    /*p1 = new Plane(selPlane.x + splitPos,selPlane.y,selPlane.width-splitPos,selPlane.height);
-    p2 = new Plane(selPlane.x,selPlane.y,selPlane.x + splitPos,selPlane.height);
-    planes.push(p1);
-    planes.push(p2);*/
-    //do a horizontal full split
-    /*y = selPlane.y;
-    width = selPlane.width;
-    splitPos = Math.round(random(y,width));*/
   }
   y = selPlane.y;
   height = selPlane.height;
-  splitPosY = Math.round(random(y,y + height));
-  
+  splitPosY = Math.round(random(y+10,y + height-10));
+  //splitPosY = 623;
+  console.log('splitPosY: '+splitPosY);
   x = selPlane.x;
   width = selPlane.width;
-  splitPosX = Math.round(random(x,x + width));
-  
-  
-  splitPane(selPlane,"both",splitPosX,splitPosY);
+  splitPosX = Math.round(random(x+10,x + width-10));
+  //splitPosX = 623;
+  console.log('splitPosX: '+splitPosX);
+  console.log('1: ' + JSON.stringify(planes));
+  splitPane(selPlane,orientation,splitPosX,splitPosY);
+  console.log('2: ' + JSON.stringify(planes));
   planes.splice(0,1);
-  console.log(planes);
+  console.log('3: ' + JSON.stringify(planes));
+  
+  
+  for (let i = 0; i < 10; i++) {
+    p = planes[0];
+    y = p.y;
+    height = p.height;
+    splitPosY = Math.round(random(y+10,y + height-10));
+    //splitPosY = 35;
+    console.log('splitPosY: '+splitPosY);
+    x = p.x;
+    width = p.width;
+    splitPosX = Math.round(random(x+10,x + width-10));
+    //splitPosX = 35;
+    console.log('splitPosX: '+splitPosX);
+
+     if ((random() < 0.5) == true) {
+      orientation = "horizontal";
+    } else {
+      orientation = "vertical";
+    }
+    
+    splitPane(p,orientation,splitPosX,splitPosY);
+    console.log('4-' + i + ': ' + JSON.stringify(planes));
+    planes.splice(0,1);
+  }
+  console.log('5:' + JSON.stringify(planes));
   
 }
 function splitPane(plane, orientation, splitPosX,splitPosY) {
   if (orientation === "horizontal") {
-    p1 = new Plane(plane.x,plane.y + splitPosY,plane.width,plane.height - splitPosY);
-    p2 = new Plane(plane.y,plane.x,plane.width,plane.y + splitPosY);
+    p1 = new Plane(plane.x,plane.y,plane.width,splitPosY-plane.y);
+    p2 = new Plane(plane.x,splitPosY,plane.width,plane.height - splitPosY + plane.y);
     planes.push(p1);
     planes.push(p2);
   } else if (orientation === "vertical") {
-    p1 = new Plane(plane.x + splitPosX,plane.y,plane.width-splitPosX,plane.height);
-    p2 = new Plane(plane.x,plane.y,plane.x + splitPosX,plane.height);
+    console.log('split from: ' + JSON.stringify(plane));
+    p1 = new Plane(plane.x,plane.y,splitPosX-plane.x,plane.height);
+    p2 = new Plane(splitPosX,plane.y,plane.width-splitPosX+plane.x,plane.height);
     planes.push(p1);
     planes.push(p2);
   } else {
-    p1 = new Plane(plane.x,plane.y,plane.width-splitPosX,plane.height-splitPosY);
-    p2 = new Plane(plane.x+splitPosX,plane.y,plane.width-splitPosX,plane.height-splitPosY);
-    p3 = new Plane(plane.x,plane.y+splitPosY,plane.width-splitPosX,plane.height-splitPosY);
-    p4 = new Plane(plane.x+splitPosX,plane.y+splitPosY,plane.width-splitPosX,plane.height-splitPosY);
+    p1 = new Plane(plane.x,plane.y,splitPosX-plane.x,splitPosY-plane.y);
+    p2 = new Plane(splitPosX,plane.y,plane.x+plane.width-splitPosX,splitPosY-plane.y);
+    p3 = new Plane(plane.x,splitPosY,splitPosX-plane.x,plane.height-splitPosY+plane.y);
+    p4 = new Plane(splitPosX,splitPosY,plane.x+plane.width-splitPosX,plane.height-splitPosY+plane.y);
     planes.push(p1);
     planes.push(p2);
     planes.push(p3);
@@ -104,7 +119,7 @@ function Plane(x,y,width,height) {
   this.y=y;  
   this.width=width;  
   this.height=height; 
-  fill(random(255),random(255),random(255));
+  fill(random(255),random(255),random(255),210);
   rect(x,y,width,height);
   this.setColor=setColor;  
   function setColor(color) {  
