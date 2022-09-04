@@ -64,7 +64,7 @@ function divideRectangles() {
   console.log('3: ' + JSON.stringify(planes));
   
   
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 5; i++) {
     p = planes[0];
     y = p.y;
     height = p.height;
