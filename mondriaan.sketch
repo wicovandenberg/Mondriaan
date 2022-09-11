@@ -176,12 +176,12 @@ function Plane(x,y,width,height) {
   this.width=width;  
   this.height=height; 
   this.setColor=setColor;  
-  function setColor(color) {  
-    this.color=color;  
+  function setColor(c) {  
+    this.c=c;  
   }
   this.draw=draw;  
   function draw() { 
-    fill(this.color);
+    fill(this.c);
     rect(x,y,width,height); 
   }
 }
