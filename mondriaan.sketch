@@ -9,8 +9,7 @@ let pal = [];
 function setup() {
   
   //palette = {"red":color('rgba(239, 25, 17, 255)'), "yellow": color('rgba(239, 25, 17, 255)'), "blue":color('rgba(239, 25, 17, 255)'), "black": color('rgba(20, 20, 20, 255)')};
-  pal = [color('rgba(239, 25, 17, 255)'), color('rgba(243, 225, 29, 255)'), color('rgba(7, 40, 85, 255)'), color('rgba(20, 20, 20, 255)')];
-  let canvas = createCanvas(canvasWidth, canvasHeight);
+
   
   //if on website
   if (window.jQuery) { 
@@ -30,6 +29,8 @@ function setup() {
   p5init();
 }
 function p5init() {
+    pal = [color('rgba(239, 25, 17, 255)'), color('rgba(243, 225, 29, 255)'), color('rgba(7, 40, 85, 255)'), color('rgba(20, 20, 20, 255)')];
+  let canvas = createCanvas(canvasWidth, canvasHeight);
   background(255);
   noStroke();
   //strokeWeight(10);
@@ -146,19 +147,19 @@ function colorPlanes() {
   nrp = planes.length;
   console.log("nrp: " + nrp);
   index = Math.round(random(0,nrp-1));
-  copyPalette = pal;
+  copyPal = pal;
   
   for (let i = 0; i < nrp; i++) {
     console.log("index: " + index);
     sp = planes[index];
     
-    nrc = copyPalette.length;
+    nrc = copyPal.length;
     console.log("nrc: " + nrc);
     if (nrc > 0) {
       indexC = Math.round(random(0,nrc-1));
       console.log("indexC: " + indexC);
-      sp.setColor(copyPalette[indexC]);
-      copyPalette.splice(indexC,1);
+      sp.setColor(copyPal[indexC]);
+      copyPal.splice(indexC,1);
     } else {
       sp.setColor(color('255','255','255','255'));
     }
