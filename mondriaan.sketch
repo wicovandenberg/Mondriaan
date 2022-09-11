@@ -4,13 +4,12 @@ let canvasHeight = 750;
 let planes = [];
 let lines = [];
 let lineThickness = 0;
-let palette = [];
-let colors = [];
+let pal = [];
 
 function setup() {
   
   //palette = {"red":color('rgba(239, 25, 17, 255)'), "yellow": color('rgba(239, 25, 17, 255)'), "blue":color('rgba(239, 25, 17, 255)'), "black": color('rgba(20, 20, 20, 255)')};
-  palette = [color('rgba(239, 25, 17, 255)'), color('rgba(243, 225, 29, 255)'), color('rgba(7, 40, 85, 255)'), color('rgba(20, 20, 20, 255)')];
+  pal = [color('rgba(239, 25, 17, 255)'), color('rgba(243, 225, 29, 255)'), color('rgba(7, 40, 85, 255)'), color('rgba(20, 20, 20, 255)')];
   let canvas = createCanvas(canvasWidth, canvasHeight);
   
   //if on website
@@ -147,7 +146,7 @@ function colorPlanes() {
   nrp = planes.length;
   console.log("nrp: " + nrp);
   index = Math.round(random(0,nrp-1));
-  copyPalette = palette;
+  copyPalette = pal;
   
   for (let i = 0; i < nrp; i++) {
     console.log("index: " + index);
