@@ -142,7 +142,7 @@ function drawLines() {
     selLine.draw();
   }
 }
-function Plane(x,y,width,height) {   
+function Plane(x,y,width,height) {  
   this.x=x;  
   this.y=y;  
   this.width=width;  
