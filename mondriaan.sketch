@@ -1,4 +1,4 @@
-let version = "0.4";
+let version = "0.5";
 let canvasWidth = 750;
 let canvasHeight = 750;
 let planes = [];
