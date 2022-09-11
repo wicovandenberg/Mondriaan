@@ -11,7 +11,7 @@ function setup() {
   
   //if on website
   if (window.jQuery) { 
-    if (windowWidth < 768) {
+    if (windowWidth < 769) {
       canvasWidth = windowWidth-50;
       canvasHeight = windowWidth-50;
     } else {
@@ -161,7 +161,6 @@ function Line(x,y,width,height) {
   this.height=height;
   this.draw=draw;  
   function draw() { 
-    console.log('draw');
     fill(20);
     rect(x,y,width,height);  
   }
