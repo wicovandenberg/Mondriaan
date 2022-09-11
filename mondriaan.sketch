@@ -10,7 +10,7 @@ function setup() {
   
   //palette = {"red":color('rgba(239, 25, 17, 255)'), "yellow": color('rgba(239, 25, 17, 255)'), "blue":color('rgba(239, 25, 17, 255)'), "black": color('rgba(20, 20, 20, 255)')};
 
-  
+  let canvas = createCanvas(canvasWidth, canvasHeight);
   //if on website
   if (window.jQuery) { 
     if (windowWidth < 769) {
@@ -29,8 +29,8 @@ function setup() {
   p5init();
 }
 function p5init() {
-    pal = [color('rgba(239, 25, 17, 255)'), color('rgba(243, 225, 29, 255)'), color('rgba(7, 40, 85, 255)'), color('rgba(20, 20, 20, 255)')];
-  let canvas = createCanvas(canvasWidth, canvasHeight);
+  pal = [color('rgba(239, 25, 17, 255)'), color('rgba(243, 225, 29, 255)'), color('rgba(7, 40, 85, 255)'), color('rgba(20, 20, 20, 255)')];
+
   background(255);
   noStroke();
   //strokeWeight(10);
