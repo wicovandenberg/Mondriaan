@@ -4,9 +4,13 @@ let canvasHeight = 750;
 let planes = [];
 let lines = [];
 let lineThickness = 0;
+let palette = [];
+let colors = [];
 
 function setup() {
   
+  //palette = {"red":color('rgba(239, 25, 17, 255)'), "yellow": color('rgba(239, 25, 17, 255)'), "blue":color('rgba(239, 25, 17, 255)'), "black": color('rgba(20, 20, 20, 255)')};
+  palette = [color('rgba(239, 25, 17, 255)'), color('rgba(243, 225, 29, 255)'), color('rgba(7, 40, 85, 255)'), color('rgba(20, 20, 20, 255)')];
   let canvas = createCanvas(canvasWidth, canvasHeight);
   
   //if on website
@@ -33,6 +37,8 @@ function p5init() {
   planes = [0];
   lines = [];
   divideRectangles();
+  colorPlanes();
+  drawPlanes();
   drawLines();
 }
 
@@ -41,10 +47,12 @@ function draw() {
 }
 function divideRectangles() {
   /*
-  algorithm
+  algorithm:
   There is a small change on doing a cross section (split in 4 at once), maybe 10%
   and else it's a single split in 2.
+  For the colors there is always at least 1 red, 1 yellow, 1 blue and 1 black. There is a small chance an adjacent pane also gets the color of it's neighbour, this can happen only once. The rest of the panes will be white. Colors are randomly given to panes after they are created. Mondriaan uses the larger panes to color, especially the biggest pane is mostly red, but I want this to leave this by chance for now and see what comes out. Mondriaan also uses color mostly on the planes at the sides of the canvas. For now I want to see what comes out if I don't copy this.
   */
+  
   
   //first rectangle is full canvas
   fill(70);
@@ -76,7 +84,7 @@ function divideRectangles() {
   console.log('3: ' + JSON.stringify(planes));
   
   
-  for (let i = 0; i < 2; i++) {
+  for (let i = 0; i < 6; i++) {
     p = planes[0];
     y = p.y;
     height = p.height;
@@ -135,11 +143,31 @@ function splitPane(plane, splitOrientation, splitPosX,splitPosY) {
   }
   
 }
-function drawLines() {
-  for (let i = 0; i < lines.length; i++) {
-    console.log('line');
-    selLine = lines[i];
-    selLine.draw();
+function colorPlanes() {
+  nrp = planes.length;
+  console.log("nrp: " + nrp);
+  index = Math.round(random(0,nrp-1));
+  copyPalette = palette;
+  
+  for (let i = 0; i < nrp; i++) {
+    console.log("index: " + index);
+    sp = planes[index];
+    
+    nrc = copyPalette.length;
+    console.log("nrc: " + nrc);
+    if (nrc > 0) {
+      indexC = Math.round(random(0,nrc-1));
+      console.log("indexC: " + indexC);
+      sp.setColor(copyPalette[indexC]);
+      copyPalette.splice(indexC,1);
+    } else {
+      sp.setColor(color('255','255','255','255'));
+    }
+    if (index === (nrp-1)) {
+      index = 0;
+    } else {
+      index++;
+    }
   }
 }
 function Plane(x,y,width,height) {  
@@ -147,11 +175,14 @@ function Plane(x,y,width,height) {
   this.y=y;  
   this.width=width;  
   this.height=height; 
-  fill(random(255),random(255),random(255),210);
-  rect(x,y,width,height);
   this.setColor=setColor;  
   function setColor(color) {  
     this.color=color;  
+  }
+  this.draw=draw;  
+  function draw() { 
+    fill(this.color);
+    rect(x,y,width,height); 
   }
 }
 function Line(x,y,width,height) {  
@@ -163,5 +194,17 @@ function Line(x,y,width,height) {
   function draw() { 
     fill(20);
     rect(x,y,width,height);  
+  }
+}
+function drawPlanes() {
+  for (let i = 0; i < planes.length; i++) {
+    sp = planes[i];
+    sp.draw();
+  }
+}
+function drawLines() {
+  for (let i = 0; i < lines.length; i++) {
+    sl = lines[i];
+    sl.draw();
   }
 }
