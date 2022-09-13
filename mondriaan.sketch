@@ -13,7 +13,7 @@ function setup() {
   let canvas = createCanvas(canvasWidth, canvasHeight);
   //if on website
   if (window.jQuery) { 
-    if (windowWidth < 769) {
+    if (windowWidth < 768) {
       canvasWidth = windowWidth-50;
       canvasHeight = windowWidth-50;
     } else {
