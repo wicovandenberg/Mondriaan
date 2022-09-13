@@ -17,8 +17,8 @@ function setup() {
       canvasWidth = windowWidth-50;
       canvasHeight = windowWidth-50;
     } else {
-      canvasWidth = 500;
-      canvasHeight = 500;
+      canvasWidth = 550;
+      canvasHeight = 550;
     }
     resizeCanvas(canvasWidth, canvasHeight);
     canvas.parent('p5js');
