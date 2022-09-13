@@ -17,8 +17,8 @@ function setup() {
       canvasWidth = windowWidth-50;
       canvasHeight = windowWidth-50;
     } else {
-      canvasWidth = 500;
-      canvasHeight = 500;
+      canvasWidth = 550;
+      canvasHeight = 550;
     }
     resizeCanvas(canvasWidth, canvasHeight);
     canvas.parent('p5js');
@@ -48,9 +48,13 @@ function draw() {
 function divideRectangles() {
   /*
   algorithm:
-  There is a small change on doing a cross section (split in 4 at once), maybe 10%
+  - There is a small chance on doing a cross section (split in 4 at once), maybe 10%
   and else it's a single split in 2.
-  For the colors there is always at least 1 red, 1 yellow, 1 blue and 1 black. There is a small chance an adjacent pane also gets the color of it's neighbour, this can happen only once. The rest of the panes will be white. Colors are randomly given to panes after they are created. Mondriaan uses the larger panes to color, especially the biggest pane is mostly red, but I want this to leave this by chance for now and see what comes out. Mondriaan also uses color mostly on the planes at the sides of the canvas. For now I want to see what comes out if I don't copy this.
+  - TODO: A split will skipped if the remaining space (width or height) is smaller than the calculated variable line thickness so that a plane will have a minimal width or height equal to the line thickness. 
+  - All planes are drawn and then placed in an array.
+  - Drawing the lines. After all panes are created the lines are drawn on top of the intersects by looping through the planes array. The line thickness is calculated based on the canvas size (2.5%).
+  - TODO: Line ending before edge of canvas. In very rare occasions Mondriaan does not paint the line all the way to the edge of the canvas and leaves a small gap showing the intersecting planes touching. The intersection of the planes in that case is on the side of the line (in other words the line is on either one of the planes) and one of the planes is enlarged with half the line thickness. Enlarging the primary colored plane is much more common than enlarging a white plane.
+  - For the colors there is always at least 1 red, 1 yellow, 1 blue and 1 black. There is a small chance an adjacent pane also gets the color of it's neighbour, this can happen only once. The rest of the panes will be white. Colors are randomly given to panes after they are created. Mondriaan uses the larger panes to color, especially the biggest pane is mostly red, but I want this to leave this by chance for now and see what comes out. Mondriaan also uses color mostly on the planes at the sides of the canvas. For now I want to see what comes out if I don't copy this.
   */
   
   
@@ -84,7 +88,7 @@ function divideRectangles() {
   console.log('3: ' + JSON.stringify(planes));
   
   
-  for (let i = 0; i < 3; i++) {
+  for (let i = 0; i < 4; i++) {
     p = planes[0];
     y = p.y;
     height = p.height;
