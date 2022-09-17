@@ -5,7 +5,7 @@ let planes = [];
 let lines = [];
 let lineThickness = 0;
 let pal = [];
-
+//edit
 
 function setup() {
   
