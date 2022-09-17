@@ -6,6 +6,7 @@ let lines = [];
 let lineThickness = 0;
 let pal = [];
 
+
 function setup() {
   
   //palette = {"red":color('rgba(239, 25, 17, 255)'), "yellow": color('rgba(239, 25, 17, 255)'), "blue":color('rgba(239, 25, 17, 255)'), "black": color('rgba(20, 20, 20, 255)')};
